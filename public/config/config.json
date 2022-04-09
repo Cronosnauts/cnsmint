@@ -9,10 +9,10 @@
   "NFT_NAME": "Cronosnauts",
   "SYMBOL": "CN",
   "MAX_SUPPLY": 1111,
-  "WEI_COST": 200000000000000000000,
-  "DISPLAY_COST": 200,
+  "WEI_COST": 120000000000000000000,
+  "DISPLAY_COST": 120,
   "GAS_LIMIT": 285000,
-  "MARKETPLACE": "Spaceship",
-  "MARKETPLACE_LINK": "https://cronosnauts.space/",
+  "MARKETPLACE": "Crosea",
+  "MARKETPLACE_LINK": "https://www.crosea.io",
   "SHOW_BACKGROUND": true
 }

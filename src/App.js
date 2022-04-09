@@ -4,6 +4,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
+import Header from "./Header";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -97,6 +98,7 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -121,7 +123,9 @@ function App() {
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
+
   });
+
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
@@ -140,6 +144,7 @@ function App() {
         from: blockchain.account,
         value: totalCostWei,
       })
+
       .once("error", (err) => {
         console.log(err);
         setFeedback("Sorry, something went wrong please try again later.");
@@ -148,7 +153,7 @@ function App() {
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `WOW, the ${CONFIG.NFT_NAME} is yours! `
+          `WOW, the ${CONFIG.NFT_NAME} is yours!`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -165,8 +170,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
-      newMintAmount = 50;
+    if (newMintAmount > 8) {
+      newMintAmount = 8;
     }
     setMintAmount(newMintAmount);
   };
@@ -197,17 +202,19 @@ function App() {
   }, [blockchain.account]);
 
   return (
-    <s.Screen>
+   <s.Screen>
       <s.Container
         flex={1}
         ai={"center"}
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <a href={CONFIG.MARKETPLACE_LINK}>
-          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        </a>
+        <Header>
+        </Header>
         <s.SpacerSmall />
+        <a href={CONFIG.MARKETPLACE_LINK}>
+          <StyledLogo alt={"logo"} src={"/config/images/logo.png"} margin="20px" />
+        </a>
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg alt={"example"} src={"/config/images/example.gif"} />
@@ -282,7 +289,7 @@ function App() {
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  You can still find {CONFIG.NFT_NAME} on
+                  You can still find {CONFIG.NFT_NAME} on {CONFIG.MARKETPLACE}
                 </s.TextDescription>
                 <s.SpacerSmall />
                 <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
